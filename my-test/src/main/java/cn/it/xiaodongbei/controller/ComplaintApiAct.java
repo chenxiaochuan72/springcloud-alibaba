@@ -22,7 +22,7 @@ public class ComplaintApiAct {
     Logger logger= LoggerFactory.getLogger(ComplaintApiAct.class);
 
     @RequestMapping("/submit")
-    public String submitComplaint(@RequestBody Complaint complaint) {
+    public String submitComplaint1(@RequestBody Complaint complaint) {
 //        try {
 //            // 发送邮件通知
 //            extracted(complaint);
