@@ -20,7 +20,7 @@ public class TaskThreadPoolConfig {
     /**
      * 最大线程数
      */
-    private int maxPoolSize;
+    private int maxPoolSize1;
 
     /**
      * 线程活跃时间
