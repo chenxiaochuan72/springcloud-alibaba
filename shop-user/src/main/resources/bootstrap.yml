@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: service-user
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yaml # 配置文件格式
+        namespace: e7dfbbd8-c8f6-4128-b74b-946ef4e4b4bc
+        shared-dataids: all-service.yaml # 配置要引入的配置
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: e7dfbbd8-c8f6-4128-b74b-946ef4e4b4bc
+  profiles:
+    active: dev

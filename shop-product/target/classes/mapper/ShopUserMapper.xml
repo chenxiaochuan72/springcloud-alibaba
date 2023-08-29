@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.it.xiaodongbei.shopproduct.mapper.ShopUserMapper">
+
+    <resultMap id="BaseResultMap" type="cn.it.xiaodongbei.shopcommon.eneity.ShopUser">
+            <id property="uid" column="uid" jdbcType="INTEGER"/>
+            <result property="username" column="username" jdbcType="VARCHAR"/>
+            <result property="password" column="password" jdbcType="VARCHAR"/>
+            <result property="telephone" column="telephone" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        uid,username,password,
+        telephone
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from shop_user
+        where  uid = #{uid,jdbcType=INTEGER} 
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from shop_user
+        where  uid = #{uid,jdbcType=INTEGER} 
+    </delete>
+    <insert id="insert" keyColumn="uid" keyProperty="uid" parameterType="cn.it.xiaodongbei.shopcommon.eneity.ShopUser" useGeneratedKeys="true">
+        insert into shop_user
+        ( uid,username,password
+        ,telephone)
+        values (#{uid,jdbcType=INTEGER},#{username,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR}
+        ,#{telephone,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" keyColumn="uid" keyProperty="uid" parameterType="cn.it.xiaodongbei.shopcommon.eneity.ShopUser" useGeneratedKeys="true">
+        insert into shop_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="uid != null">uid,</if>
+                <if test="username != null">username,</if>
+                <if test="password != null">password,</if>
+                <if test="telephone != null">telephone,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="uid != null">#{uid,jdbcType=INTEGER},</if>
+                <if test="username != null">#{username,jdbcType=VARCHAR},</if>
+                <if test="password != null">#{password,jdbcType=VARCHAR},</if>
+                <if test="telephone != null">#{telephone,jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="cn.it.xiaodongbei.shopcommon.eneity.ShopUser">
+        update shop_user
+        <set>
+                <if test="username != null">
+                    username = #{username,jdbcType=VARCHAR},
+                </if>
+                <if test="password != null">
+                    password = #{password,jdbcType=VARCHAR},
+                </if>
+                <if test="telephone != null">
+                    telephone = #{telephone,jdbcType=VARCHAR},
+                </if>
+        </set>
+        where   uid = #{uid,jdbcType=INTEGER} 
+    </update>
+    <update id="updateByPrimaryKey" parameterType="cn.it.xiaodongbei.shopcommon.eneity.ShopUser">
+        update shop_user
+        set 
+            username =  #{username,jdbcType=VARCHAR},
+            password =  #{password,jdbcType=VARCHAR},
+            telephone =  #{telephone,jdbcType=VARCHAR}
+        where   uid = #{uid,jdbcType=INTEGER} 
+    </update>
+</mapper>

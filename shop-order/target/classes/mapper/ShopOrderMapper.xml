@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.it.xiaodongbei.shoporder.mapper.ShopOrderMapper">
+
+    <resultMap id="BaseResultMap" type="cn.it.xiaodongbei.shopcommon.eneity.ShopOrder">
+            <id property="oid" column="oid" jdbcType="INTEGER"/>
+            <result property="uid" column="uid" jdbcType="INTEGER"/>
+            <result property="username" column="username" jdbcType="VARCHAR"/>
+            <result property="pid" column="pid" jdbcType="INTEGER"/>
+            <result property="pname" column="pname" jdbcType="VARCHAR"/>
+            <result property="pprice" column="pprice" jdbcType="DOUBLE"/>
+            <result property="number" column="number" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        oid,uid,username,
+        pid,pname,pprice,
+        number
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from shop_order
+        where  oid = #{oid,jdbcType=INTEGER} 
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from shop_order
+        where  oid = #{oid,jdbcType=INTEGER} 
+    </delete>
+    <insert id="insert" keyColumn="oid" keyProperty="oid" parameterType="cn.it.xiaodongbei.shopcommon.eneity.ShopOrder" useGeneratedKeys="true">
+        insert into shop_order
+        ( oid,uid,username
+        ,pid,pname,pprice
+        ,number)
+        values (#{oid,jdbcType=INTEGER},#{uid,jdbcType=INTEGER},#{username,jdbcType=VARCHAR}
+        ,#{pid,jdbcType=INTEGER},#{pname,jdbcType=VARCHAR},#{pprice,jdbcType=DOUBLE}
+        ,#{number,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" keyColumn="oid" keyProperty="oid" parameterType="cn.it.xiaodongbei.shopcommon.eneity.ShopOrder" useGeneratedKeys="true">
+        insert into shop_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="oid != null">oid,</if>
+                <if test="uid != null">uid,</if>
+                <if test="username != null">username,</if>
+                <if test="pid != null">pid,</if>
+                <if test="pname != null">pname,</if>
+                <if test="pprice != null">pprice,</if>
+                <if test="number != null">number,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="oid != null">#{oid,jdbcType=INTEGER},</if>
+                <if test="uid != null">#{uid,jdbcType=INTEGER},</if>
+                <if test="username != null">#{username,jdbcType=VARCHAR},</if>
+                <if test="pid != null">#{pid,jdbcType=INTEGER},</if>
+                <if test="pname != null">#{pname,jdbcType=VARCHAR},</if>
+                <if test="pprice != null">#{pprice,jdbcType=DOUBLE},</if>
+                <if test="number != null">#{number,jdbcType=INTEGER},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="cn.it.xiaodongbei.shopcommon.eneity.ShopOrder">
+        update shop_order
+        <set>
+                <if test="uid != null">
+                    uid = #{uid,jdbcType=INTEGER},
+                </if>
+                <if test="username != null">
+                    username = #{username,jdbcType=VARCHAR},
+                </if>
+                <if test="pid != null">
+                    pid = #{pid,jdbcType=INTEGER},
+                </if>
+                <if test="pname != null">
+                    pname = #{pname,jdbcType=VARCHAR},
+                </if>
+                <if test="pprice != null">
+                    pprice = #{pprice,jdbcType=DOUBLE},
+                </if>
+                <if test="number != null">
+                    number = #{number,jdbcType=INTEGER},
+                </if>
+        </set>
+        where   oid = #{oid,jdbcType=INTEGER} 
+    </update>
+    <update id="updateByPrimaryKey" parameterType="cn.it.xiaodongbei.shopcommon.eneity.ShopOrder">
+        update shop_order
+        set 
+            uid =  #{uid,jdbcType=INTEGER},
+            username =  #{username,jdbcType=VARCHAR},
+            pid =  #{pid,jdbcType=INTEGER},
+            pname =  #{pname,jdbcType=VARCHAR},
+            pprice =  #{pprice,jdbcType=DOUBLE},
+            number =  #{number,jdbcType=INTEGER}
+        where   oid = #{oid,jdbcType=INTEGER} 
+    </update>
+</mapper>
